@@ -13,6 +13,7 @@ class FourRoomsEnv(MiniGridEnv):
     def __init__(self, agent_pos=None, goal_pos=None, grid_size=19):
         self._agent_default_pos = agent_pos
         self._goal_default_pos = goal_pos
+        # grid_size should be odd number => to create walls in the middle of the map
         super().__init__(grid_size=grid_size, max_steps=100)
 
     def _gen_grid(self, width, height):
@@ -69,8 +70,6 @@ class FourRoomsEnv(MiniGridEnv):
 
     def step(self, action):
         obs, reward, done, info = MiniGridEnv.step(self, action)
-        #print(self.unwrapped.agent_pos)
-        #raise ValueError
         return obs, reward, done, info
 
 register(
